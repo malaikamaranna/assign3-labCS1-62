@@ -1,1 +1,16 @@
+{
+  "dependencies": {
+    "express": "^4.17.2",
+    "sqlite3": "^5.0.2"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "sarissa",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
 

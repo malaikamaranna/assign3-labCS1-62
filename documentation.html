@@ -1,1 +1,73 @@
 # assign3-labCS1-62
+<h1>Web API</h1>
+<p>The web API endpoints return data about the phones by using REST principles. This data comes from the database and is described in JSON form. </p>
+
+<h2>HTTPS Requests</h2>
+<p>
+The Web API uses REST principles. This means that the Data is accessed through HTTPS requests that have an specific endpoint. The method of the request depends on its action.
+</p>
+<table>
+    <tr>
+        <th>Method</th>
+        <th>Action</th>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>Create a new resource</td>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>Retrieve a resource</td>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td>Update a resource</td>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td>Delete a resource</td>
+    </tr>
+</table>
+
+
+
+<h2>Website Resources</h2>
+<p>These are the requests and responses of the API. The recourses and data is transmitted with JSON.</p>
+<table>
+    <tr>
+        <th>Endpoint URI's</th>
+        <th>Request Method</th>
+        <th>Description</th>
+        <th>Response Code</th>
+    </tr>
+    <tr>
+        <td> http://localhost:3000/add</td>
+        <td>POST</td>
+        <td><p>Create a new product</p></td>
+        <td>201 Created</td>
+    </tr>
+    <tr>
+        <td> http://localhost:3000/getall</td>
+        <td>GET</td>
+        <td><p>Get a list of all the phones</p></td>
+        <td>200 OK</td>
+    </tr>
+    <tr>
+        <td> http://localhost:3000/get/000</td>
+        <td>GET</td>
+        <td><p>Get phone with ID 000</p></td>
+        <td>200 OK</td>
+    </tr>
+    <tr>
+        <td> http://localhost:3000/update/000</td>
+        <td>UP</td>
+        <td><p>Update phone with ID 000</p></td>
+        <td>204 No Content</td>
+    </tr>
+    <tr>
+        <td> http://localhost:3000/delete/000</td>
+        <td>DELETE</td>
+        <td><p>Delete phone with ID 000</p></td>
+        <td>204 No Content</td>
+    </tr>
+</table>

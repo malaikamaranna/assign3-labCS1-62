@@ -50,21 +50,24 @@ app.use(express.json());
 //       everything works.
 
 // add new phone
-app.post("/", function(req, res) {
-    db.all(`INSERT INTO phones (brand, model, os, image, screensize)
-	VALUES (?, ?, ?, ?, ?)`,
-	[item['brand'], item['model'], item['os'], item['image'],  item['screensize']], function(err, rows) {
-		if (err) {
-			res.status(400).send(err);
-		 } 
-		 else {
-    	return res.status(201).json(rows);
-		 }
-    });
+app.post("/add", function(req, res) {
+
+    db.run(`INSERT INTO phones (brand, model, os, image, screensize)
+                VALUES (?, ?, ?, ?, ?)`,
+                [req.body['brand'], req.body['model'], req.body['os'], req.body['image'],  req.body['screensize']], (function(err, rows) {
+	   if (err) {
+		res.status(400).send(err);
+	} 
+	else {
+	   res.status(201).json(rows);
+	}
+	}));
 });
 
 
-/ get all phones (done)
+
+
+// get all phones (done)
 app.get("/getall", function(req, res) {
     db.all("SELECT id, brand, model, os, image, screensize FROM phones", function(err, rows) {
 		if (err) {
@@ -86,13 +89,14 @@ app.get("/get/:id", function(req, res) {
     	return res.status(200).json(rows);
 		 }
     });
+});
 
 // update phone by id
-app.put("/:id", function(req, res) {
+app.put("/update/:id", function(req, res) {
     db.all(`UPDATE phones
 	SET brand=?, model=?, os=?, image=?,
-	screensize=? WHERE id=?`,
-	[item['brand'], item['model'], item['os'], item['image'], item['screensize'], item['id']], function(err, rows) {
+	screensize=? WHERE id=?`,  
+	[req.body['brand'], req.body['model'], req.body['os'], req.body['image'], req.body['screensize'], req.body['id']],[req.params.id], function(err, result) {
 		if (err) {
 			res.status(400).send(err);
 		 } 
@@ -100,10 +104,11 @@ app.put("/:id", function(req, res) {
 			res.sendStatus(404);
 		 } 
 		else {
-    	return res.status(204).json(rows);
+    	return res.sendStatus(204);
 		 }
     });
 });
+
 
 // delete phone by id (almost done doesnt give empty me)
 app.delete("/delete/:id", function(req, res) {

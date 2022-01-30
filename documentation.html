@@ -1,11 +1,13 @@
 # assign3-labCS1-62
 <h1>Web API</h1>
 <p>The web API endpoints return data about the phones by using REST principles. This data comes from the database and is described in JSON form. </p>
+<hr>
 
 <h2>HTTPS Requests</h2>
 <p>
 The Web API uses REST principles. This means that the Data is accessed through HTTPS requests that have an specific endpoint. The method of the request depends on its action.
 </p>
+
 <table>
     <tr>
         <th>Method</th>
@@ -28,18 +30,18 @@ The Web API uses REST principles. This means that the Data is accessed through H
         <td>Delete a resource</td>
     </tr>
 </table>
-
+<hr>
 
 
 <h2>Website Resources</h2>
 <p>These are the requests and responses of the API. The recourses and data is transmitted with JSON.</p>
+<hr>
 <table>
     <tr>
         <th>Endpoint URI's</th>
         <th>Request Method</th>
         <th>Description</th>
         <th>Response Code</th>
-        <th>Error Response Code</th>
     </tr>
     <tr>
         <td> http://localhost:3000/add</td>
@@ -72,3 +74,27 @@ The Web API uses REST principles. This means that the Data is accessed through H
         <td>204 No Content</td>
     </tr>
 </table>
+<hr>
+
+<p> These are error response codes that apply to request methods </p>
+
+<table>
+    
+    <tr>
+        <th>Error Code</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>304</td>
+        <td>400</td>
+        <td>403</td>
+        <td>404</td>
+    </tr>
+    <tr>
+        <td>Not Modified.</td>
+        <td>Bad Request - The request could not be understood by the server due to malformed syntax.</td>
+        <td>Forbidden.</td>
+        <td>Not Found.</td>
+    </tr>    
+    </table>
+  

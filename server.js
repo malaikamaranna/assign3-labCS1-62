@@ -46,6 +46,79 @@ app.use(bodyParser.json());
 // 
 // TODO: Add your routes here and remove the example routes once you know how
 //       everything works.
+
+// add new phone
+app.post("/", function(req, res) {
+    db.all(`INSERT INTO phones (brand, model, os, image, screensize)
+	VALUES (?, ?, ?, ?, ?)`,
+	[item['brand'], item['model'], item['os'], item['image'],  item['screensize']], function(err, rows) {
+		if (err) {
+			res.status(400).send(err);
+		 } 
+		 else {
+    	return res.status(201).json(rows);
+		 }
+    });
+});
+
+
+// get all phones
+app.get("/", function(req, res) {
+    db.all("SELECT id, brand, model, os, image, screensize FROM phones", function(err, rows) {
+		if (err) {
+			res.status(400).send(err);
+		 } 
+		 else {
+    	return res.status(200).json(rows);
+		 }
+    });
+});
+
+// get phone by id
+app.get("/get/:id", function(req, res) {
+    db.all("SELECT id, brand, model, os, image, screensize FROM phones WHERE id=000", function(err, rows) {
+		if (err) {
+			res.status(400).send(err);
+		 } 
+		 else {
+    	return res.status(200).json(rows);
+		 }
+    });
+});
+
+// update phone by id
+app.put("/:id", function(req, res) {
+    db.all(`UPDATE phones
+	SET brand=?, model=?, os=?, image=?,
+	screensize=? WHERE id=?`,
+	[item['brand'], item['model'], item['os'], item['image'], item['screensize'], item['id']], function(err, rows) {
+		if (err) {
+			res.status(400).send(err);
+		 } 
+		else if (result.n === 0) {
+			res.sendStatus(404);
+		 } 
+		else {
+    	return res.status(204).json(rows);
+		 }
+    });
+});
+
+// delete phone by id
+app.delete("/:id", function(req, res) {
+    db.all("DELETE FROM phones WHERE id=" + id, function(err, rows) {
+		if (err) {
+			res.status(400).send(err);
+		 } 
+		 else if (result.n === 0) {
+			res.sendStatus(404);
+		 } 
+		 else {
+    	return res.status(204).json(rows);
+		 }
+    });
+});
+
 // ###############################################################################
 
 // This example route responds to http://localhost:3000/hello with an example JSON object.

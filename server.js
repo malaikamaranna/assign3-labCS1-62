@@ -62,8 +62,8 @@ app.post("/", function(req, res) {
 });
 
 
-// get all phones
-app.get("/", function(req, res) {
+/ get all phones (done)
+app.get("/getall", function(req, res) {
     db.all("SELECT id, brand, model, os, image, screensize FROM phones", function(err, rows) {
 		if (err) {
 			res.status(400).send(err);
@@ -74,9 +74,9 @@ app.get("/", function(req, res) {
     });
 });
 
-// get phone by id
+// get phone by id (done)
 app.get("/get/:id", function(req, res) {
-    db.all("SELECT id, brand, model, os, image, screensize FROM phones WHERE id=000", function(err, rows) {
+    db.all("SELECT id, brand, model, os, image, screensize FROM phones WHERE id="+ req.params.id , function(err, rows){
 		if (err) {
 			res.status(400).send(err);
 		 } 
@@ -84,7 +84,6 @@ app.get("/get/:id", function(req, res) {
     	return res.status(200).json(rows);
 		 }
     });
-});
 
 // update phone by id
 app.put("/:id", function(req, res) {

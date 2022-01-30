@@ -39,6 +39,8 @@ var app = express();
 // We need some middleware to parse JSON data in the body of our HTTP requests:
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
+app.use(express.json());
+
 
 
 // ###############################################################################
@@ -103,17 +105,17 @@ app.put("/:id", function(req, res) {
     });
 });
 
-// delete phone by id
-app.delete("/:id", function(req, res) {
-    db.all("DELETE FROM phones WHERE id=" + id, function(err, rows) {
+// delete phone by id (almost done doesnt give empty me)
+app.delete("/delete/:id", function(req, res) {
+    db.run("DELETE FROM phones WHERE id=" + req.params.id, function(err, result) {
 		if (err) {
 			res.status(400).send(err);
 		 } 
-		 else if (result.n === 0) {
+		 else if (result === 0) {
 			res.sendStatus(404);
 		 } 
 		 else {
-    	return res.status(204).json(rows);
+    	return res.sendStatus(204);
 		 }
     });
 });

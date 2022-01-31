@@ -66,6 +66,7 @@ app.post("/add", function(req, res) {
 
 
 
+
 // get all phones (done)
 app.get("/getall", function(req, res) {
     db.all("SELECT id, brand, model, os, image, screensize FROM phones", function(err, rows) {
@@ -92,19 +93,20 @@ app.get("/get/:id", function(req, res) {
 
 // update phone by id
 app.put("/update/:id", function(req, res) {
-    db.all(`UPDATE phones
+    db.run(`UPDATE phones
 	SET brand=?, model=?, os=?, image=?,
 	screensize=? WHERE id=?`,  
-	[req.body['brand'], req.body['model'], req.body['os'], req.body['image'], req.body['screensize'], req.body['id']],[req.params.id], function(err, result) {
+	[req.body['brand'], req.body['model'], req.body['os'], req.body['image'], req.body['screensize'], [req.params.id]], function(err, rows) {
 		if (err) {
 			res.status(400).send(err);
 		 } 
-		else if (result.n === 0) {
+		else if (rows === 0) {
 			res.sendStatus(404);
 		 } 
-		else {
-    	return res.sendStatus(204);
-		 }
+		else 
+		{
+    	return res.status(204).json(rows);	
+		}
     });
 });
 
@@ -144,12 +146,19 @@ app.get("/hello", function(req, res) {
 app.get('/db-example', function(req, res) {
     // Example SQL statement to select the name of all products from a specific brand
     db.all(`SELECT * FROM phones WHERE brand=?`, ['Fairphone'], function(err, rows) {
-	
+		if (err) {
+			res.status(400).send(err);
+		 }
+		  else if (rows === 0) {
+			res.sendStatus(404);
+		 } 
+		 else {
+    	return res.status(200).json(rows);
+		 }
     	// TODO: add code that checks for errors so you know what went wrong if anything went wrong
     	// TODO: set the appropriate HTTP response headers and HTTP response codes here.
 
     	// # Return db response as JSON
-    	return res.json(rows)
     });
 });
 
@@ -199,3 +208,4 @@ function my_database(filename) {
 	});
 	return db;
 }
+

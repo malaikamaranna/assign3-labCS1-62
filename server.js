@@ -50,80 +50,79 @@ app.use(express.json());
 //       everything works.
 
 // add new phone
-app.post("/add", function(req, res) {
-   
-    db.run(`INSERT INTO phones (brand, model, os, image, screensize)
+app.post("/add", function (req, res) {
+
+	db.run(`INSERT INTO phones (brand, model, os, image, screensize)
                 VALUES (?, ?, ?, ?, ?)`,
-                [req.body['brand'], req.body['model'], req.body['os'], req.body['image'],  req.body['screensize']], (function(err,rows) {
-	   if (err) {
-		res.status(400).send(err);
-	} 
-	else {
-	   res.status(201).json(rows);
-	}
-	}));
+		[req.body['brand'], req.body['model'], req.body['os'], req.body['image'], req.body['screensize']], (function (err, rows) {
+			if (err) {
+				res.status(400).send(err);
+			}
+			else {
+				res.status(201).json(rows);
+			}
+		}));
 });
 
 
 
 
 // get all phones (done)
-app.get("/getall", function(req, res) {
-    db.all("SELECT id, brand, model, os, image, screensize FROM phones", function(err, rows) {
+app.get("/getall", function (req, res) {
+	db.all("SELECT id, brand, model, os, image, screensize FROM phones", function (err, rows) {
 		if (err) {
 			res.status(400).send(err);
-		 } 
-		 else {
-    	return res.status(200).json(rows);
-		 }
-    });
+		}
+		else {
+			return res.status(200).json(rows);
+		}
+	});
 });
 
 // get phone by id (done)
-app.get("/get/:id", function(req, res) {
-    db.all("SELECT id, brand, model, os, image, screensize FROM phones WHERE id="+ req.params.id , function(err, rows){
+app.get("/get/:id", function (req, res) {
+	db.all("SELECT id, brand, model, os, image, screensize FROM phones WHERE id=" + req.params.id, function (err, rows) {
 		if (err) {
 			res.status(400).send(err);
-		 } 
-		 else {
-    	return res.status(200).json(rows);
-		 }
-    });
+		}
+		else {
+			return res.status(200).json(rows);
+		}
+	});
 });
 
 // update phone by id
-app.put("/update/:id", function(req, res) {
-    db.run(`UPDATE phones
+app.put("/update/:id", function (req, res) {
+	db.run(`UPDATE phones
 	SET brand=?, model=?, os=?, image=?,
-	screensize=? WHERE id=?`,  
-	[req.body['brand'], req.body['model'], req.body['os'], req.body['image'], req.body['screensize'], [req.params.id]], function(err, rows) {
-		if (err) {
-			res.status(400).send(err);
-		 } 
-		else if (rows === 0) {
-			res.sendStatus(404);
-		 } 
-		else 
-		{
-    	return res.status(204).json(rows);	
-		}
-    });
+	screensize=? WHERE id=?`,
+		[req.body['brand'], req.body['model'], req.body['os'], req.body['image'], req.body['screensize'], [req.params.id]], function (err, rows) {
+			if (err) {
+				res.status(400).send(err);
+			}
+			else if (rows === 0) {
+				res.sendStatus(404);
+			}
+			else {
+				return res.status(204).json(rows);
+			}
+		});
 });
 
 
 // delete phone by id (almost done doesnt give empty me)
-app.delete("/delete/:id", function(req, res) {
-    db.run("DELETE FROM phones WHERE id=" + req.params.id, function(err, result) {
+app.delete("/delete/:id", function (req, res) {
+	db.run("DELETE FROM phones WHERE id=" + req.params.id, function (err, result) {
 		if (err) {
 			res.status(400).send(err);
-		 } 
-		 else if (result === 0) {
+		}
+		else if (result === 0) {
 			res.sendStatus(404);
-		 } 
-		 else {
-    	return res.sendStatus(204);
-		 }
-    });
+		}
+		else {
+			return res.sendStatus(204);
+		}
+	});
 });
 
 // ###############################################################################
@@ -131,26 +130,26 @@ app.delete("/delete/:id", function(req, res) {
 // This route responds to http://localhost:3000/db-example by selecting some data from the
 // database and return it as JSON object.
 // Please test if this works on your own device before you make any changes.
-app.get('/db-example', function(req, res) {
-    // Example SQL statement to select the name of all products from a specific brand
-    db.all(`SELECT * FROM phones WHERE brand=?`, ['Fairphone'], function(err, rows) {
+app.get('/db-example', function (req, res) {
+	// Example SQL statement to select the name of all products from a specific brand
+	db.all(`SELECT * FROM phones WHERE brand=?`, ['Fairphone'], function (err, rows) {
 		if (err) {
 			res.status(400).send(err);
-		 }
-		  else if (rows === 0) {
+		}
+		else if (rows === 0) {
 			res.sendStatus(404);
-		 } 
-		 else {
-    	return res.status(200).json(rows);
-		 }
-    	// TODO: add code that checks for errors so you know what went wrong if anything went wrong
-    	// TODO: set the appropriate HTTP response headers and HTTP response codes here.
+		}
+		else {
+			return res.status(200).json(rows);
+		}
+		// TODO: add code that checks for errors so you know what went wrong if anything went wrong
+		// TODO: set the appropriate HTTP response headers and HTTP response codes here.
 
-    	// # Return db response as JSON
-    });
+		// # Return db response as JSON
+	});
 });
 
-app.post('/post-example', function(req, res) {
+app.post('/post-example', function (req, res) {
 	// This is just to check if there is any data posted in the body of the HTTP request:
 	console.log(req.body);
 	return res.json(req.body);
@@ -168,10 +167,10 @@ console.log("Your Web server should be up and running, waiting for requests to c
 function my_database(filename) {
 	// Conncect to db by opening filename, create filename if it does not exist:
 	var db = new sqlite.Database(filename, (err) => {
-  		if (err) {
+		if (err) {
 			console.error(err.message);
-  		}
-  		console.log('Connected to the phones database.');
+		}
+		console.log('Connected to the phones database.');
 	});
 	// Create our phones table if it does not exist already:
 	db.serialize(() => {
@@ -184,10 +183,10 @@ function my_database(filename) {
         	image 	CHAR(254) NOT NULL,
         	screensize INTEGER NOT NULL
         	)`);
-		db.all(`select count(*) as count from phones`, function(err, result) {
+		db.all(`select count(*) as count from phones`, function (err, result) {
 			if (result[0].count == 0) {
 				db.run(`INSERT INTO phones (brand, model, os, image, screensize) VALUES (?, ?, ?, ?, ?)`,
-				["Fairphone", "FP3", "Android", "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fairphone_3_modules_on_display.jpg/320px-Fairphone_3_modules_on_display.jpg", "5.65"]);
+					["Fairphone", "FP3", "Android", "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fairphone_3_modules_on_display.jpg/320px-Fairphone_3_modules_on_display.jpg", "5.65"]);
 				console.log('Inserted dummy phone entry into empty database');
 			} else {
 				console.log("Database already contains", result[0].count, " item(s) at startup.");
@@ -196,4 +195,3 @@ function my_database(filename) {
 	});
 	return db;
 }
-

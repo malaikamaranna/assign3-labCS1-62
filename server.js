@@ -128,18 +128,6 @@ app.delete("/delete/:id", function(req, res) {
 
 // ###############################################################################
 
-// This example route responds to http://localhost:3000/hello with an example JSON object.
-// Please test if this works on your own device before you make any changes.
-
-app.get("/hello", function(req, res) {
-    response_body = {'Hello': 'World'} ;
-
-    // This example returns valid JSON in the response, but does not yet set the
-    // associated HTTP response header.  This you should do yourself in your
-    // own routes!
-    res.json(response_body) ;
-});
-
 // This route responds to http://localhost:3000/db-example by selecting some data from the
 // database and return it as JSON object.
 // Please test if this works on your own device before you make any changes.

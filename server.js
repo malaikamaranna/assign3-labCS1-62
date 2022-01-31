@@ -51,10 +51,10 @@ app.use(express.json());
 
 // add new phone
 app.post("/add", function(req, res) {
-
+   
     db.run(`INSERT INTO phones (brand, model, os, image, screensize)
                 VALUES (?, ?, ?, ?, ?)`,
-                [req.body['brand'], req.body['model'], req.body['os'], req.body['image'],  req.body['screensize']], (function(err, rows) {
+                [req.body['brand'], req.body['model'], req.body['os'], req.body['image'],  req.body['screensize']], (function(err,rows) {
 	   if (err) {
 		res.status(400).send(err);
 	} 
@@ -63,7 +63,6 @@ app.post("/add", function(req, res) {
 	}
 	}));
 });
-
 
 
 

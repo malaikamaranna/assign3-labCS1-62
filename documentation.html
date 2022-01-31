@@ -1,11 +1,14 @@
-# assign3-labCS1-62
 <h1>Web API</h1>
-<p>The web API endpoints return data about the phones by using REST principles. This data comes from the database and is described in JSON form. </p>
-<hr>
 
+<p>The web API endpoints return data about the phones by using REST principles. This data comes from the database and is
+    described in JSON form. </p>
+
+<hr>
 <h2>HTTPS Requests</h2>
+<hr>
 <p>
-The Web API uses REST principles. This means that the Data is accessed through HTTPS requests that have an specific endpoint. The method of the request depends on its action.
+    The Web API uses REST principles. This means that the Data is accessed through HTTPS requests that have an specific
+    endpoint. The method of the request depends on its action.
 </p>
 
 <table>
@@ -32,80 +35,295 @@ The Web API uses REST principles. This means that the Data is accessed through H
 </table>
 <hr>
 
+<h2>Data Fromat</h2>
+<hr>
+<p>The web API will return the data in JSON format when the response is succeful. In case of a POST request the API
+    would parse the data into a JSON format.</p>
 
 <h2>Website Resources</h2>
+<hr>
 <p>These are the requests and responses of the API. The recourses and data is transmitted with JSON.</p>
 
 <table>
     <tr>
-        <th>Endpoint URI's</th>
+        <th>Functions</th>
         <th>Request Method</th>
         <th>Description</th>
-        <th>Response Code</th>
     </tr>
     <tr>
-        <td> http://localhost:3000/add</td>
+        <td><a href="#add">Add new phone</a></td>
         <td>POST</td>
-        <td><p>Create a new product</p></td>
-        <td>201 Created</td>
+        <td>
+            <p>Create a new product</p>
+        </td>
     </tr>
     <tr>
-        <td> http://localhost:3000/getall</td>
+        <td><a href="#getall">Get all phones</a></td>
         <td>GET</td>
-        <td><p>Get a list of all the phones</p></td>
-        <td>200 OK</td>
+        <td>
+            <p>Get a list of all the phones</p>
+        </td>
     </tr>
     <tr>
-        <td> http://localhost:3000/get/000</td>
+        <td><a href="#get">Get certian phone</a></td>
         <td>GET</td>
-        <td><p>Get phone with ID 000</p></td>
-        <td>200 OK</td>
+        <td>
+            <p>Get phone with ID 000</p>
+        </td>
     </tr>
     <tr>
-        <td> http://localhost:3000/update/000</td>
+        <td><a href="#update">Update certain phone</a></td>
         <td>UP</td>
-        <td><p>Update phone with ID 000</p></td>
-        <td>204 No Content</td>
+        <td>
+            <p>Update phone with ID</p>
+        </td>
     </tr>
     <tr>
-        <td> http://localhost:3000/delete/000</td>
+        <td><a href="#delete">Delete certain phone</a></td>
         <td>DELETE</td>
-        <td><p>Delete phone with ID 000</p></td>
-        <td>204 No Content</td>
+        <td>
+            <p>Delete phone with ID 000</p>
+        </td>
     </tr>
 </table>
 <hr>
 
+<h2 id="add">Add new phone</h2>
+<hr>
+<p>Add a new product to the database.</p>
+<h3>POST Request</h3>
+<p>http://localhost:3000/add</p>
+<h4>Input:</h4>
+<p>
+    { <br>
+    &nbsp;"brand": "nokia",<br>
+    &nbsp;"model": "12",<br>
+    &nbsp;"os": "Android",<br>
+    &nbsp;"image":
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fairphone_3_modules_on_display.jpg/320px-Fairphone_3_modules_on_display.jpg",<br>
+    &nbsp;"screensize": 6.31 <br>
+    }
+</p>
+<h3>Responses</h3>
+<table>
+    <tr>
+        <th>Response Codes</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>201</td>
+        <td>Created</td>
+    </tr>
+    <tr>
+        <td>400</td>
+        <td>Bad Request - The request could not be understood by the server due to malformed syntax.</td>
+    </tr>
+</table>
+<p><b> Response Sample</b></p>
+<p>
+    [<br>
+    &nbsp;{<br>
+    &nbsp;&nbsp;"id": 1,<br>
+    &nbsp;&nbsp;"brand": "Fairphone",<br>
+    &nbsp;&nbsp;"model": "FP3",<br>
+    &nbsp;&nbsp;"os": "Android",<br>
+    &nbsp;&nbsp;"image":
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fairphone_3_modules_on_display.jpg/320px-Fairphone_3_modules_on_display.jpg",<br>
+    &nbsp;&nbsp;"screensize": 5.65 <br>
+    &nbsp;} <br>
+
+    &nbsp;{ <br>
+    &nbsp;&nbsp;"id": 2,<br>
+    &nbsp;&nbsp;"brand": "nokia",<br>
+    &nbsp;&nbsp;"model": "12",<br>
+    &nbsp;&nbsp;"os": "Android",<br>
+    &nbsp;&nbsp;"image":
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fairphone_3_modules_on_display.jpg/320px-Fairphone_3_modules_on_display.jpg",<br>
+    &nbsp;&nbsp;"screensize": 6.31 <br>
+    &nbsp;}
+
+    ]
+</p>
+<hr>
+<h2 id="getall">GET all phones</h2>
+<hr>
+<p>Gets a list of all the phones with their information.</p>
+<h3>GET Request</h3>
+<p>http://localhost:3000/getall</p>
+
+<h3>Responses</h3>
+<table>
+    <tr>
+        <th>Response Codes</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>200</td>
+        <td>OK</td>
+    </tr>
+    <tr>
+        <td>400</td>
+        <td>Bad Request - The request could not be understood by the server due to malformed syntax.</td>
+    </tr>
+</table>
+<p><b> Response Sample</b></p>
+<p>
+    [<br>
+    &nbsp;{<br>
+    &nbsp;&nbsp;"id": 1,<br>
+    &nbsp;&nbsp;"brand": "Fairphone",<br>
+    &nbsp;&nbsp;"model": "FP3",<br>
+    &nbsp;&nbsp;"os": "Android",<br>
+    &nbsp;&nbsp;"image":
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fairphone_3_modules_on_display.jpg/320px-Fairphone_3_modules_on_display.jpg",<br>
+    &nbsp;&nbsp;"screensize": 5.65 <br>
+    &nbsp;} <br>
+    ]
+</p>
+<hr>
+<h2 id="get">Get certain phone</h2>
+<hr>
+<p>Gets a phone by its ID.</p>
+<h3>GET Request</h3>
+<p>http://localhost:3000/get/:id</p>
+<p>ID - integer</p>
+<p>exapmple value: 1</p>
+
+<h3>Responses</h3>
+<table>
+    <tr>
+        <th>Response Codes</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>200</td>
+        <td>OK</td>
+    </tr>
+    <tr>
+        <td>400</td>
+        <td>Bad Request - The request could not be understood by the server due to malformed syntax.</td>
+    </tr>
+</table>
+<p><b> Response Sample</b></p>
+<p>
+    [<br>
+    &nbsp;{<br>
+    &nbsp;&nbsp;"id": 1,<br>
+    &nbsp;&nbsp;"brand": "Fairphone",<br>
+    &nbsp;&nbsp;"model": "FP3",<br>
+    &nbsp;&nbsp;"os": "Android",<br>
+    &nbsp;&nbsp;"image":
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fairphone_3_modules_on_display.jpg/320px-Fairphone_3_modules_on_display.jpg",<br>
+    &nbsp;&nbsp;"screensize": 5.65 <br>
+    &nbsp;} <br>
+    ]
+</p>
+<hr>
+<h2 id="update">Update certain phone</h2>
+<hr>
+<p>Update a phone by its ID.</p>
+<h3>PUT Request</h3>
+<p>http://localhost:3000/update/1</p>
+<p>ID - integer</p>
+<p>exapmple value: 1</p>
+<h4>Input:</h4>
+<p>
+    [<br>
+    &nbsp;{<br>
+    &nbsp;&nbsp;"id": 1,<br>
+    &nbsp;&nbsp;"brand": "Samsung",<br>
+    &nbsp;&nbsp;"model": "FP3",<br>
+    &nbsp;&nbsp;"os": "Android",<br>
+    &nbsp;&nbsp;"image":
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fairphone_3_modules_on_display.jpg/320px-Fairphone_3_modules_on_display.jpg",<br>
+    &nbsp;&nbsp;"screensize": 5.65 <br>
+    &nbsp;} <br>
+    ]
+</p>
+<h3>Responses</h3>
+<table>
+    <tr>
+        <th>Response Codes</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>204</td>
+        <td>No content</td>
+    </tr>
+    <tr>
+        <td>404</td>
+        <td>Not found</td>
+    </tr>
+    <tr>
+        <td>400</td>
+        <td>Bad Request - The request could not be understood by the server due to malformed syntax.</td>
+    </tr>
+</table>
+<p><b> Response Sample</b></p>
+<p>
+    [<br>
+    &nbsp;{<br>
+    &nbsp;&nbsp;"id": 1,<br>
+    &nbsp;&nbsp;"brand": "Samsung",<br>
+    &nbsp;&nbsp;"model": "FP3",<br>
+    &nbsp;&nbsp;"os": "Android",<br>
+    &nbsp;&nbsp;"image":
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Fairphone_3_modules_on_display.jpg/320px-Fairphone_3_modules_on_display.jpg",<br>
+    &nbsp;&nbsp;"screensize": 5.65 <br>
+    &nbsp;} <br>
+    ]
+</p>
+<hr>
+<h2 id="delete">Delete certain phone</h2>
+<hr>
+<p>Delete a phone by its ID.</p>
+<h3>DELETE Request</h3>
+<p>http://localhost:3000/delete/1</p>
+<p>ID - integer</p>
+<p>exapmple value: 1</p>
+
+<h3>Responses</h3>
+<table>
+    <tr>
+        <th>Response Codes</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>204</td>
+        <td>No content</td>
+    </tr>
+    <tr>
+        <td>404</td>
+        <td>Not found</td>
+    </tr>
+    <tr>
+        <td>400</td>
+        <td>Bad Request - The request could not be understood by the server due to malformed syntax.</td>
+    </tr>
+</table>
+<p><b> Response Sample</b></p>
+<p>
+    []
+</p>
+<hr>
 <h2>Error</h2>
+<hr>
 <p> These are the response codes the API returns in case of a error with the request methods.</p>
 
 <table>
-    
+
     <tr>
         <th>Error Code</th>
         <th>Description</th>
     </tr>
     <tr>
-        <td>304</td>
-        <td>Not Modified.</td>
-    </tr>
-    <tr>
         <td>400</td>
-        <td>Bad Request - The request could not be understood by the server due to malformed syntax.</td>        
-    </tr>
-    <tr>
-        <td>403</td>   
-        <td>Forbidden.</td> 
+        <td>Bad Request - The request could not be understood by the server due to malformed syntax.</td>
     </tr>
     <tr>
         <td>404</td>
         <td>Not Found.</td>
     </tr>
-    </table>
+</table>
 
-    <hr>
 
-    <h2>Data Fromat</h2>
-    <p>The web API will return the data in JSON format when the response is succeful. In case of a POST request the API would parse the data into a JSON format.</p>
-  
-  
